@@ -1,4 +1,4 @@
-FROM daocloud.io/node:0.10-onbuild
+FROM daocloud.io/library/node:0.12.0-wheezy
 # replace this with your application's default port
 
 #RUN npm install
