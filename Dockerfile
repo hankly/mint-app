@@ -1,8 +1,15 @@
-FROM daocloud.io/library/node:0.12.0-wheezy
-# replace this with your application's default port
-RUN mkdir /usr/src/mint
-COPY . /usr/src/mint/
-RUN cd /usr/src/mint  && 
-    npm install
-EXPOSE 8010
-RUN npm run dev
+# DOCKER-VERSION 0.3.4
+FROM    centos:centos6
+
+# Enable EPEL for Node.js
+RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+# Install Node.js and npm
+RUN     yum install -y npm
+
+# Bundle app source
+COPY . /src
+# Install app dependencies
+RUN cd /src; npm install
+
+EXPOSE  8010
+CMD ["npm run dev"]
